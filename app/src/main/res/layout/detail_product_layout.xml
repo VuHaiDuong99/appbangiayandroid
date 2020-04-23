@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:background="#5EFFA407"
+            android:textSize="20dp"
+            android:fontFamily="@string/fab_transformation_scrim_behavior"
+            android:gravity="center"
+            android:hint="Chi Tiết Sản Phẩm"></TextView>
+
+        <LinearLayout
+            android:layout_width="396dp"
+            android:layout_height="301dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="185dp"
+                android:layout_height="290dp"
+                android:id="@+id/imageViewDetail"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                ></ImageView>
+
+            <LinearLayout
+                android:layout_width="206dp"
+                android:layout_height="290dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtNameDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên Sản Phẩm : "
+                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/txtPriceDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá Sản Phẩm : "
+                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    ></TextView>
+                <Spinner
+                    android:padding="15dp"
+                    android:background="@drawable/custom_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spiner"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    ></Spinner>
+                <Button
+                    android:id="@+id/btnGioHang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_button"
+                    android:layout_marginTop="30dp"
+                    android:text="Thêm Vào Giỏ Hàng"
+                    ></Button>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô Tả : "
+                android:textSize="30dp"
+                android:layout_margin="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/txtMotaDetail"
+                android:textSize="20dp"
+                ></TextView>
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/botton_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="?android:windowBackground"
+        app:menu="@menu/botton_nav"
+        ></com.google.android.material.bottomnavigation.BottomNavigationView>
+</RelativeLayout>
