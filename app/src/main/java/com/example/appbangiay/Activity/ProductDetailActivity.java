@@ -1,12 +1,17 @@
 package com.example.appbangiay.Activity;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -28,7 +33,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.detail_product_layout);
         AnhXa();
         getInfo();
+        soluongSanPhamGioHang();
     }
+
+    private void soluongSanPhamGioHang() {
+        Integer[] soluong =new Integer []{1,2,3,4,5,6,7,8,9,10};
+        ArrayAdapter<Integer> list = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,soluong);
+        spinner.setAdapter(list);
+
+
+    }
+
     private void getInfo() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();

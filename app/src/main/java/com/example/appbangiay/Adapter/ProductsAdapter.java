@@ -1,8 +1,10 @@
 package com.example.appbangiay.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.ViewUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbangiay.Activity.ListProductActivity;
+import com.example.appbangiay.Activity.ProductDetailActivity;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 
@@ -72,7 +77,18 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHo
             imageProducts =itemView.findViewById(R.id.imageViewProduct);
             txtNameProduct = itemView.findViewById(R.id.nameProduct);
             txtPriceProudcts = itemView.findViewById(R.id.priceProduct);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ProductDetailActivity.class);
+                    Products products = listProduct.get(getAdapterPosition());
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", products.getId());
+                    intent.putExtras(bundle);
+                    // goij activity moi
+                   context.startActivity(intent);
+                }
+            });
 
         }
 
