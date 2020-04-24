@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.appbangiay.DataBase.ProductsDB;
+import com.example.appbangiay.Model.Cart;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
+import com.example.appbangiay.Util.ImageAdapter;
+
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 public class ProductDetailActivity extends AppCompatActivity {
     private TextView txtName,txtMota, txtPrice;
@@ -27,6 +32,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Spinner spinner;
     private ProductsDB productsDB;
     private Products product;
+    private int id,tien;
+    private String name;
+    public ImageAdapter imageAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,21 +42,64 @@ public class ProductDetailActivity extends AppCompatActivity {
         AnhXa();
         getInfo();
         soluongSanPhamGioHang();
+        themGioHang();
     }
+    private void themGioHang() {
+        btnGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.listCart.size()> 0){
+                    boolean tag = false;
+                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    for(int i =0;i<MainActivity.listCart.size();i++){
+                        // neu như san pham trung nhau
+                        if(MainActivity.listCart.get(i).getId() == id){
+                            MainActivity.listCart.get(i).setCountProduct(soluong+MainActivity.listCart.get(i).getCountProduct());
+                            tag = true;
+                        }
+                        MainActivity.listCart.get(i).setPrice(
+                                MainActivity.listCart.get(i).getCountProduct()
+                                        *MainActivity.listCart.get(i).getPrice());
+                    }
+                    if(tag == false){
+                        int sl = Integer.parseInt(spinner.getSelectedItem().toString());
+                        //int tongTien = Integer.parseInt(txtPrice.getText().toString()) * sl;
+                        int tongTien = tien * soluong;
+                        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                        Bitmap bitmap = bitmapDrawable.getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                        byte[] imgeByte = baos.toByteArray();
+                        MainActivity.listCart.add(new Cart(id,name,tongTien,imgeByte,sl));
+                    }
+                }
+                else {
+                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    //int tongTien = Integer.parseInt(txtPrice.getText().toString()) * soluong;
+                    int tongTien = tien * soluong;
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                    byte[] imgeByte = baos.toByteArray();
+                    MainActivity.listCart.add(new Cart(id,txtName.getText().toString(),tongTien,imgeByte,soluong));
+                }
+                Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
+                startActivity(intent);
 
+            }
+        });
+    }
     private void soluongSanPhamGioHang() {
         Integer[] soluong =new Integer []{1,2,3,4,5,6,7,8,9,10};
         ArrayAdapter<Integer> list = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,soluong);
         spinner.setAdapter(list);
-
-
     }
-
     private void getInfo() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!= null) {
-            int id = bundle.getInt("id");
+            id = bundle.getInt("id");
             product = productsDB.getProductById(id);
             txtName.setText(product.getName());
             txtMota.setText(product.getDescription());
@@ -57,6 +108,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             byte[] image = product.getImage();
             Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
             imageView.setImageBitmap(bitmap);
+            tien = product.getPrice();
+            name = product.getName();
         }
     }
     private void AnhXa() {

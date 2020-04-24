@@ -25,8 +25,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHoder> {
-    //private ImageView  imageViewProduct;
-   // private TextView txtPrice, txtName;
+
     private Context context;
     private ArrayList<Products> listProduct = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHo
     public ProductsAdapter(Context context, ArrayList<Products> listProduct) {
         this.context = context;
         this.listProduct = listProduct;
-        //this.onItemClickedListener = onItemClickedListener;
+
     }
 
     @NonNull

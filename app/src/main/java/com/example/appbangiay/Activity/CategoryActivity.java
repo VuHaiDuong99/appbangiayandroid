@@ -39,9 +39,6 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(adapter);
-        /*for(int i=0;i<listProducts.size();i++){
-            Log.i("du lieu", listProducts.get(i).getName().toString());
-        }*/
         AnhXa();
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
         // getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeActivity().onAttachFragment()).commit();

@@ -23,6 +23,7 @@ import com.example.appbangiay.Activity.HomeActivity;
 import com.example.appbangiay.Adapter.ListProductAdapter;
 import com.example.appbangiay.Adapter.ProductsAdapter;
 import com.example.appbangiay.DataBase.ProductsDB;
+import com.example.appbangiay.Model.Cart;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,19 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     // su dung processbar
     private View proscessbar;
+    public static ArrayList<Cart> listCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        productsDB = new ProductsDB(this,"ProductsDB",null,1);
-        listProducts = new ArrayList<Products>();
-
-        listProducts = productsDB.getAllProductsNew();
-        adapter = new ProductsAdapter(getApplicationContext(),listProducts);
-        adapter.notifyDataSetChanged();
-
         AnhXa();
-        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
         ActionViewFiler();
 
     }
@@ -85,12 +79,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.id_reView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        productsDB = new ProductsDB(this,"ProductsDB",null,1);
+        listProducts = new ArrayList<Products>();
+        listProducts = productsDB.getAllProductsNew();
+        adapter = new ProductsAdapter(getApplicationContext(),listProducts);
         recyclerView.setAdapter(adapter);
-        // su dung process
-        //proscessbar = findViewById(R.id.processBar);
+        adapter.notifyDataSetChanged();
+
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         proscessbar =  layoutInflater.inflate(R.layout.processbar,null);
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
+        // neu gio hang bang null , cap phat bo nho cho no,con ko du nguyen gia tri trong mang
+        if(listCart !=null){}
+        else{listCart = new ArrayList<Cart>();}
     }
     private BottomNavigationView.OnNavigationItemSelectedListener nav =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -103,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this,MainActivity.class);
                             startActivity(intent);
                             break;
-
                         case R.id.nav_Account:
                             Intent intent1 = new Intent(MainActivity.this, ListProductActivity.class);
                             startActivity(intent1);

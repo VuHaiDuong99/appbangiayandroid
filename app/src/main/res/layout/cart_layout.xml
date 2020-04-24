@@ -38,8 +38,7 @@
                 android:text="Thành Tiền : "></TextView>
 
             <TextView
-
-                android:id="@+id/tongTien"
+                android:id="@+id/tongTienCart"
                 android:layout_width="242dp"
                 android:layout_height="25dp"
                 android:gravity="center"
