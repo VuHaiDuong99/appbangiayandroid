@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,17 +16,22 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.appbangiay.DataBase.ProductsDB;
 import com.example.appbangiay.Model.Cart;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.example.appbangiay.Util.ImageAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 public class ProductDetailActivity extends AppCompatActivity {
+    private BottomNavigationView bottomNavigationView;
     private TextView txtName,txtMota, txtPrice;
     private ImageView imageView;
     private Button btnGioHang;
@@ -120,5 +126,42 @@ public class ProductDetailActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spiner);
         productsDB = new ProductsDB(this,"ProductsDB",null,1);
         product = new Products();
+        bottomNavigationView = findViewById(R.id.botton_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener nav =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment fragment = null;
+                    //AppCompatActivity appCompatActivity = null;
+                    switch (menuItem.getItemId()){
+                        case R.id.nav_Home:
+                            Intent intent = new Intent(ProductDetailActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            break;
+                        case R.id.nav_Products:
+                            Intent intent1 = new Intent(ProductDetailActivity.this,ListProductActivity.class);
+                            intent1.putExtra("abc",1);
+                            startActivity(intent1);
+                            break;
+
+                        case R.id.nav_Categorys:
+                            Intent intent2 = new Intent(ProductDetailActivity.this,CategoryActivity.class);
+                            startActivity(intent2);
+                            break;
+
+                        case R.id.nav_Cart:
+                            Intent intent3 = new Intent(ProductDetailActivity.this,CartActivity.class);
+                            startActivity(intent3);
+                            break;
+                        case R.id.nav_Account:
+                            Intent intent4 = new Intent(ProductDetailActivity.this, AdminActivity.class);
+                            startActivity(intent4);
+                            break;
+                    }
+                    return false;
+                }
+            };
+
 }

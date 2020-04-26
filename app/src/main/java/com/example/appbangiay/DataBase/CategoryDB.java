@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
@@ -53,14 +54,14 @@ public class CategoryDB extends SQLiteOpenHelper {
         }
         return list;
     }
-    public void addCategory(Category category){
+    public void addCategory(String name,byte[] image){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Id,category.getId());
-        contentValues.put(Name,category.getName());
-        contentValues.put(Image,category.getImage());
-        db.insert(TableName,null,contentValues);
-        db.close();
+        String sql ="Insert into CategoryDB values (null,?,?)";
+        SQLiteStatement sqLiteStatement = db.compileStatement(sql);
+        sqLiteStatement.clearBindings();
+        sqLiteStatement.bindString(1,name);
+        sqLiteStatement.bindBlob(2,image);
+        sqLiteStatement.executeInsert();
     }
     // Sua Category
     public void updateCategory (int id, Category category){

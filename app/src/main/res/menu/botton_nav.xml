@@ -6,13 +6,23 @@
         android:icon="@drawable/ic_home_black_24dp"
         ></item>
     <item
-    android:id="@+id/nav_Account"
-    android:title="account"
-    android:icon="@drawable/ic_account_circle_black_24dp"
+        android:id="@+id/nav_Products"
+        android:title="Pro"
+        android:icon="@drawable/ic_list_black_24dp"
     ></item>
     <item
-        android:id="@+id/nav_Search"
-        android:title="Search"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:id="@+id/nav_Categorys"
+        android:title="Cate"
+        android:icon="@drawable/ic_featured_play_list_black_24dp"
+        ></item>
+    <item
+        android:id="@+id/nav_Cart"
+        android:title="Cart"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        ></item>
+    <item
+        android:id="@+id/nav_Account"
+        android:title="Acc"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         ></item>
 </menu>

@@ -3,6 +3,9 @@ package com.example.appbangiay.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbangiay.Adapter.CategoryAdapter;
 import com.example.appbangiay.Adapter.ProductsAdapter;
+import com.example.appbangiay.DataBase.CategoryDB;
 import com.example.appbangiay.DataBase.ProductsDB;
+import com.example.appbangiay.Model.Category;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,32 +25,47 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class CategoryActivity extends AppCompatActivity {
-    private ProductsDB productsDB;
-    private ProductsAdapter adapter;
-    private RecyclerView recyclerView;
-    private ArrayList<Products> listProducts;
-
+    private ListView listView;
+    private Category category;
+    private ArrayList<Category> listCategory;
+    public static CategoryAdapter adapter;
+    public static CategoryDB categoryDB;
+    public static int idCategory;
     private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_layout);
-        productsDB = new ProductsDB(this,"ProductsDB",null,1);
-        listProducts = new ArrayList<Products>();
-        //productsDB.addProduct(new Products(1,"Vu hai duong","Vu hai duong",3000,null,1));
-        listProducts = productsDB.getAllProducts();
-        adapter = new ProductsAdapter(getApplicationContext(),listProducts);
-        adapter.notifyDataSetChanged();
-        recyclerView = findViewById(R.id.id_test);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
-        recyclerView.setAdapter(adapter);
         AnhXa();
-        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
-        // getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,new HomeActivity().onAttachFragment()).commit();
+        ListViewClick();
     }
+
+    private void ListViewClick() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idCategory = listCategory.get(position).getId();
+                Intent intent = new Intent(CategoryActivity.this,ListProductActivity.class);
+                intent.putExtra("abc",2);
+                startActivity(intent);
+            }
+        });
+    }
+
     public void AnhXa(){
+        listView = findViewById(R.id.listViewCategory);
         bottomNavigationView = findViewById(R.id.botton_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
+        categoryDB = new CategoryDB(this,"CategoryDB",null,1);
+        listCategory = new ArrayList<Category>();
+        //Category category1 = new Category(1,"giay au",null);
+         category = new Category(2,"giay luoi",null);
+        listCategory.add(category);
+
+        //listCategory =  categoryDB.getAllCategory();
+        adapter = new CategoryAdapter(listCategory,this);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
     private BottomNavigationView.OnNavigationItemSelectedListener nav =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,21 +75,31 @@ public class CategoryActivity extends AppCompatActivity {
                     //AppCompatActivity appCompatActivity = null;
                     switch (menuItem.getItemId()){
                         case R.id.nav_Home:
-                            Intent intent = new Intent(CategoryActivity.this,HomeActivity.class);
+                            Intent intent = new Intent(CategoryActivity.this,MainActivity.class);
                             startActivity(intent);
                             break;
-
-                        case R.id.nav_Account:
-                            Intent intent1 = new Intent(CategoryActivity.this,HomeActivity.class);
+                        case R.id.nav_Products:
+                            Intent intent1 = new Intent(CategoryActivity.this,ListProductActivity.class);
+                            intent1.putExtra("abc",1);
                             startActivity(intent1);
                             break;
-                        case R.id.nav_Search:
-                            Intent intent2 = new Intent(CategoryActivity.this,HomeActivity.class);
+
+                        case R.id.nav_Categorys:
+                            Intent intent2 = new Intent(CategoryActivity.this,CategoryActivity.class);
                             startActivity(intent2);
+                            break;
+
+                        case R.id.nav_Cart:
+                            Intent intent3 = new Intent(CategoryActivity.this,CartActivity.class);
+                            startActivity(intent3);
+                            break;
+                        case R.id.nav_Account:
+                            Intent intent4 = new Intent(CategoryActivity.this, AdminActivity.class);
+                            startActivity(intent4);
                             break;
                     }
                     return false;
-
                 }
             };
+
 }

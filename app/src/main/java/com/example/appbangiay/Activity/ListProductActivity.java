@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -25,14 +26,34 @@ public class ListProductActivity extends AppCompatActivity {
     private ListProductAdapter adapter;
     private ListView listView;
     private BottomNavigationView bottomNavigationView;
+    int dl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_layout);
         AnhXa();
+        //getData();
         ClickListView();
+        dl = getIntent().getIntExtra("abc",-1);
+        if(dl == 1){
+                getDataProducts();
+        }
+        else{
+            getDataByCategory();
+        }
     }
-
+    private void getDataByCategory() {
+        listProduct = productsDB.getProductByCategory(CategoryActivity.idCategory);
+        adapter = new ListProductAdapter(listProduct,getApplicationContext());
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+    private void getDataProducts() {
+        listProduct = productsDB.getAllProducts();
+        adapter = new ListProductAdapter(listProduct,getApplicationContext());
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
     private void ClickListView() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -47,15 +68,10 @@ public class ListProductActivity extends AppCompatActivity {
             }
         });
     }
-
     private void AnhXa() {
         listView = findViewById(R.id.listViewProduct);
         listProduct = new ArrayList<Products>();
         productsDB = new ProductsDB(this,"ProductsDB",null,1);
-        listProduct = productsDB.getAllProducts();
-        adapter = new ListProductAdapter(listProduct,getApplicationContext());
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
         bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
     }
@@ -71,17 +87,28 @@ public class ListProductActivity extends AppCompatActivity {
                             Intent intent = new Intent(ListProductActivity.this,MainActivity.class);
                             startActivity(intent);
                             break;
-
-                        case R.id.nav_Account:
-                            Intent intent1 = new Intent(ListProductActivity.this,HomeActivity.class);
+                        case R.id.nav_Products:
+                            Intent intent1 = new Intent(ListProductActivity.this,ListProductActivity.class);
+                            intent1.putExtra("abc",1);
                             startActivity(intent1);
                             break;
-                        case R.id.nav_Search:
-                            Intent intent2 = new Intent(ListProductActivity.this,AddProductActivity.class);
+
+                        case R.id.nav_Categorys:
+                            Intent intent2 = new Intent(ListProductActivity.this,CategoryActivity.class);
                             startActivity(intent2);
+                            break;
+
+                        case R.id.nav_Cart:
+                            Intent intent3 = new Intent(ListProductActivity.this,CartActivity.class);
+                            startActivity(intent3);
+                            break;
+                        case R.id.nav_Account:
+                            Intent intent4 = new Intent(ListProductActivity.this, AdminActivity.class);
+                            startActivity(intent4);
                             break;
                     }
                     return false;
                 }
             };
+
 }

@@ -3,18 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="666dp" />
+            android:layout_height="50dp"
+            android:hint="Danh Mục Sản Phẩm"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:background="#5EFFA407"
+            android:fontFamily="@string/fab_transformation_scrim_behavior"
+            ></TextView>
+        <ListView
+            android:dividerHeight="10.0sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewCategory"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+        </ListView>
 
 
+
+    </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botton_nav"
         android:layout_width="match_parent"
@@ -24,5 +40,4 @@
         android:background="?android:windowBackground"
         app:menu="@menu/botton_nav"
         ></com.google.android.material.bottomnavigation.BottomNavigationView>
-    </LinearLayout>
 </RelativeLayout>

@@ -18,6 +18,7 @@
             android:fontFamily="@string/fab_transformation_scrim_behavior"
             ></TextView>
         <ListView
+            android:dividerHeight="10.0sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/listViewProduct"

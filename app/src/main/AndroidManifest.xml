@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.appbangiay">
-    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" ></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.AddCategoryActivity"></activity>
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,13 +20,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.HomeActivity" android:screenOrientation="portrait"/>
-        <activity  android:name=".Activity.CategoryActivity"  android:screenOrientation="portrait" />
-        <activity  android:name=".Activity.AddProductActivity"  android:screenOrientation="portrait" />
-        <activity  android:name=".Activity.ListProductActivity"  android:screenOrientation="portrait" />
-        <activity  android:name=".Activity.ProductDetailActivity"  android:screenOrientation="portrait" />
-        <activity  android:name=".Activity.CartActivity"  android:screenOrientation="portrait" />
-        <activity  android:name=".Activity.CustomerActivity"  android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ListProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ProductDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AdminActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

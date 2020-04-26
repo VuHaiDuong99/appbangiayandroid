@@ -95,6 +95,23 @@ public class ProductsDB extends SQLiteOpenHelper {
         return products;
 
     }
+    public ArrayList<Products> getProductByCategory(int category_id){
+        ArrayList<Products> list = new ArrayList<>();
+        String sql = "Select * from "+ TableName+" where IdCategory = "+category_id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        // taoj list der tra ve
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                Products product = new Products(cursor.getInt(0),cursor.getString(1),
+                        cursor.getString(2),cursor.getInt(3)
+                        ,cursor.getBlob(4),cursor.getInt(5));
+                list.add(product);
+            }
+        }
+        return list;
+
+    }
     public void addProduct(Products product){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

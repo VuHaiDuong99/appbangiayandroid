@@ -50,7 +50,7 @@ public class AddProductActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // chuyen data image ==> byte
+
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -67,10 +67,9 @@ public class AddProductActivity extends AppCompatActivity {
                 Toast.makeText(AddProductActivity.this,"Them thanh cong",Toast.LENGTH_SHORT).show();
             }
         });
-        /*MainActivity.listProducts = MainActivity.productsDB.getAllProducts();
-        MainActivity.adapter = new ProductsAdapter(getApplicationContext(),MainActivity.listProducts);*/
+
         MainActivity.adapter.notifyDataSetChanged();
-        //MainActivity.adapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -114,13 +113,10 @@ public class AddProductActivity extends AppCompatActivity {
                             break;
 
                         case R.id.nav_Account:
-                            Intent intent1 = new Intent(AddProductActivity.this,HomeActivity.class);
+                            Intent intent1 = new Intent(AddProductActivity.this,MainActivity.class);
                             startActivity(intent1);
                             break;
-                        case R.id.nav_Search:
-                            Intent intent2 = new Intent(AddProductActivity.this,AddProductActivity.class);
-                            startActivity(intent2);
-                            break;
+
                     }
                     return false;
 

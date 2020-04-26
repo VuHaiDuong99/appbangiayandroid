@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +15,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.appbangiay.Activity.HomeActivity;
-import com.example.appbangiay.Adapter.ListProductAdapter;
 import com.example.appbangiay.Adapter.ProductsAdapter;
 import com.example.appbangiay.DataBase.ProductsDB;
 import com.example.appbangiay.Model.Cart;
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void AnhXa(){
         drawerLayout = findViewById(R.id.drawerLayout);
-        bottomNavigationView = findViewById(R.id.botton_nav);
+
         viewFlipper = findViewById(R.id.viewFlipper);
         recyclerView = findViewById(R.id.id_reView);
         recyclerView.setHasFixedSize(true);
@@ -88,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         proscessbar =  layoutInflater.inflate(R.layout.processbar,null);
+        bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
         // neu gio hang bang null , cap phat bo nho cho no,con ko du nguyen gia tri trong mang
         if(listCart !=null){}
@@ -104,13 +101,24 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this,MainActivity.class);
                             startActivity(intent);
                             break;
-                        case R.id.nav_Account:
-                            Intent intent1 = new Intent(MainActivity.this, ListProductActivity.class);
+                        case R.id.nav_Products:
+                            Intent intent1 = new Intent(MainActivity.this,ListProductActivity.class);
+                            intent1.putExtra("abc",1);
                             startActivity(intent1);
                             break;
-                        case R.id.nav_Search:
-                            Intent intent2 = new Intent(MainActivity.this,AddProductActivity.class);
+
+                        case R.id.nav_Categorys:
+                            Intent intent2 = new Intent(MainActivity.this,CategoryActivity.class);
                             startActivity(intent2);
+                            break;
+
+                        case R.id.nav_Cart:
+                            Intent intent3 = new Intent(MainActivity.this,CartActivity.class);
+                            startActivity(intent3);
+                            break;
+                        case R.id.nav_Account:
+                            Intent intent4 = new Intent(MainActivity.this, AdminActivity.class);
+                            startActivity(intent4);
                             break;
                     }
                     return false;

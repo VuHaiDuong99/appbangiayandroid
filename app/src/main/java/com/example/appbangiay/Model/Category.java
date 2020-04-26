@@ -3,12 +3,12 @@ package com.example.appbangiay.Model;
 public class Category {
     private int id;
     private String name;
-    private byte image;
+    private byte[] image;
 
-    public Category(int anInt, String cursorString, byte[] blob) {
+    public Category() {
     }
 
-    public Category(int id, String name, byte image) {
+    public Category(int id, String name, byte[] image) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -30,11 +30,11 @@ public class Category {
         this.name = name;
     }
 
-    public byte getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(byte image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 }

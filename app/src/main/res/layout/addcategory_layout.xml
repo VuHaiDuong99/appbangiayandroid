@@ -3,69 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_gravity="center"
+        android:background="#5EFFA407"
+        android:textSize="20dp"
+        android:fontFamily="@string/fab_transformation_scrim_behavior"
+        android:gravity="center"
+        android:hint="Thêm Danh Mục Sản Phẩm"></TextView>
     <EditText
-
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/edit_text"
         android:hint="Enter name"
-        android:id="@+id/txtName"
+        android:id="@+id/txtNameAddCategory"
         android:layout_marginTop="150dp"
-        ></EditText>
-
-
-    <EditText
-        android:id="@+id/txtDescription"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edit_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:hint="Enter description"
-        ></EditText>
-    <EditText
-        android:id="@+id/txtPrice"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edit_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:hint="Enter Price"
-
-        ></EditText>
-    <EditText
-        android:id="@+id/txtCategory"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edit_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:hint="Enter Category"
-
         ></EditText>
     <TextView
         android:layout_width="104dp"
         android:layout_height="56dp"
         android:hint="Image : "
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="250dp"
         android:gravity="center"
         android:layout_marginLeft="22dp"></TextView>
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewAddCategory"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@android:color/darker_gray"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="250dp"
         ></ImageView>
 
     <Button
-        android:id="@+id/btnImage"
+        android:id="@+id/btnImageCategory"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginLeft="280dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/edit_button"
         android:text="Tải lên"></Button>
 
@@ -74,7 +52,7 @@
         android:layout_height="40dp"
         android:layout_width="300dp"
         android:text="Thêm"
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAddCategory"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"></Button>
     <com.google.android.material.bottomnavigation.BottomNavigationView
