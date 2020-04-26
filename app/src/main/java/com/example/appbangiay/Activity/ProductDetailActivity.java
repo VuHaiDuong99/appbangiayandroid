@@ -86,7 +86,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
                 startActivity(intent);
-
             }
         });
     }

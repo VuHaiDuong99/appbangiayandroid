@@ -19,11 +19,11 @@
             android:textStyle="bold"></TextView>
 
         <ListView
-            android:background="@drawable/custom_listview"
             android:id="@+id/listViewCart"
             android:layout_width="wrap_content"
-            android:layout_height="520dp"
-            android:layout_margin="10dp"></ListView>
+            android:layout_height="452dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_listview"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,14 +35,18 @@
                 android:layout_width="161dp"
                 android:layout_height="25dp"
                 android:gravity="center"
-                android:text="Thành Tiền : "></TextView>
+                android:text="Thành Tiền : "
+                android:textSize="15dp"
+                ></TextView>
 
             <TextView
                 android:id="@+id/tongTienCart"
                 android:layout_width="242dp"
                 android:layout_height="25dp"
                 android:gravity="center"
-                android:text="Tiền:"></TextView>
+                android:text="Tiền:"
+                android:textSize="15dp"
+                android:textColor="#C3F43C36"></TextView>
         </LinearLayout>
 
         <Button
@@ -50,7 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-
             android:background="@drawable/edit_button"
             android:text="Thanh Toán"
 
