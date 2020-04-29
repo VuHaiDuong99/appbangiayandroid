@@ -8,12 +8,19 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/edit_text"
+        android:hint="Enter Id"
+        android:id="@+id/txtIdCustomer"
+        android:layout_marginTop="100dp"
+        ></EditText>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_text"
         android:hint="Enter name"
         android:id="@+id/txtName"
         android:layout_marginTop="150dp"
         ></EditText>
-
-
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="300dp"

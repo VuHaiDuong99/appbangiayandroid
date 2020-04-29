@@ -10,16 +10,16 @@ import android.database.sqlite.SQLiteStatement;
 import androidx.annotation.Nullable;
 
 import com.example.appbangiay.Model.Category;
-import com.example.appbangiay.Model.Products;
+import com.example.appbangiay.Model.DonHang;
 
 import java.util.ArrayList;
 
-public class CategoryDB extends SQLiteOpenHelper {
-    public static final String TableName ="CategoryDB2";
+public class DonHangDB  extends SQLiteOpenHelper {
+    public static final String TableName ="DonHangDB1";
     public static final String Id ="Id";
-    public static final String Name ="Name";
-    public static final String Image = "Image";
-    public CategoryDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public static final String IdCustomer ="IdCustomer";
+    public static final String TongTien = "TongTien";
+    public DonHangDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -27,8 +27,8 @@ public class CategoryDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlCreat = "Create table " + TableName + "("
                 + Id + " Integer Primary key AUTOINCREMENT,"
-                + Name + " Text, "
-                + Image + " BLOB )";
+                + IdCustomer + " Integer, "
+                + TongTien + " Double )";
 
         db.execSQL(sqlCreat);
     }
@@ -40,7 +40,7 @@ public class CategoryDB extends SQLiteOpenHelper {
         // tạo lại
         onCreate(db);
     }
-    public ArrayList<Category> getAllCategory(){
+    /*public ArrayList<DonHang> getAllDonHang(){
         ArrayList<Category> list = new ArrayList<Category>();
         String sql = "Select * from " + TableName;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -54,17 +54,17 @@ public class CategoryDB extends SQLiteOpenHelper {
             }
         }
         return list;
-    }
-    public void addCategory(String name,byte[] image){
+    }*/
+    public void addDonHang(int idCustomer,double tongtien){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql ="Insert into CategoryDB2 values (null,?,?)";
+        String sql ="Insert into DonHangDB1 values (null,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
-        sqLiteStatement.bindString(1,name);
-        sqLiteStatement.bindBlob(2,image);
+        sqLiteStatement.bindDouble(1,idCustomer);
+        sqLiteStatement.bindDouble(2,tongtien);
         sqLiteStatement.executeInsert();
     }
-    // Sua Category
+   /* // Sua Category
     public void updateCategory (int id, Category category){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -73,25 +73,36 @@ public class CategoryDB extends SQLiteOpenHelper {
         contentValues.put(Image,category.getImage());
         db.update(TableName, contentValues, "Id = " + category.getId(), null );
         db.close();
-    }
-    public void deleteCategory (int id){
-        SQLiteDatabase db = getWritableDatabase();
-        String sql = " Delete From "+ TableName+" where Id =" + id;
-        db.execSQL(sql);
-        db.close();
-    }
-    public byte[] getImage(int id){
-        byte[] image = null;
-        ArrayList<Products> list = new ArrayList<>();
-        String sql = "Select Image from "+ TableName+" where Id = "+id;
+    }*/
+   public int getByIdDonHang(int idCustomer){
+       int idDonHang = 0;
+       String sql = "select Id from DonHangDB1 where IdCustomer = "+ idCustomer;
+       SQLiteDatabase db = this.getReadableDatabase();
+       Cursor cursor = db.rawQuery(sql, null);
+       // taoj list der tra ve
+       if (cursor != null) {
+           while (cursor.moveToNext()) {
+                idDonHang = cursor.getInt(cursor.getColumnIndex("Id"));
+           }
+       }
+       return idDonHang;
+   }
+    public Double getTongTien(int idCustomer){
+        Double tongtien = 0.0;
+        String sql = "select TongTien from DonHangDB1 where IdCustomer = "+ idCustomer;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         // taoj list der tra ve
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                image = cursor.getBlob(cursor.getColumnIndex("Image"));
+                tongtien = cursor.getDouble(cursor.getColumnIndex("TongTien"));
             }
         }
-        return image;
+        return tongtien;
     }
-}
+   /* public void deleteCategory (int id){
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = " Delete From "+ TableName+" where Id =" + id;
+        db.execSQL(sql);
+        db.close();
+    }*/}

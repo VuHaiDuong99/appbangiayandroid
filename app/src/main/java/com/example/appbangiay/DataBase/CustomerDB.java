@@ -9,14 +9,13 @@ import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
-import com.example.appbangiay.Activity.AddProductActivity;
 import com.example.appbangiay.Model.Customer;
 import com.example.appbangiay.Model.Products;
 
 import java.util.ArrayList;
 
 public class CustomerDB extends SQLiteOpenHelper {
-    public static final String TableName ="ProductsDB";
+    public static final String TableName ="CustomerDB1";
     public static final String Id ="Id";
     public static final String Name ="Name";
     public static final String Address = "Address";
@@ -29,13 +28,12 @@ public class CustomerDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlCreat = "Create table " + TableName + "("
-                + Id + " Integer Primary key AUTOINCREMENT  ,"
-                + Name + " Text, "
-                + Address + " Text, "
-                + Phone + " Text, "
-                + Email + " Text) ";
-
+        String sqlCreat = "Create table " + TableName + "( "
+                + Id + " INTEGER  Primary Key ,"
+                + Name + " TEXT, "
+                + Address + " TEXT, "
+                + Phone + " TEXT, "
+                + Email + " TEXT )";
 
         db.execSQL(sqlCreat);
     }
@@ -62,18 +60,29 @@ public class CustomerDB extends SQLiteOpenHelper {
         }
         return list;
     }
-    public void addCustomer(String name,String email,String phone,String address){
+    public void addCustomer(int id,String name,String email,String phone,String address){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql ="Insert into CustomerDB values (null,?,?,?,?)";
+        String sql =" INSERT INTO CustomerDB(Id,Phone,Address,Name) VALUES (?,?,?,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
+        sqLiteStatement.bindDouble(0,id);
         sqLiteStatement.bindString(1,name);
         sqLiteStatement.bindString(2,address);
         sqLiteStatement.bindString(3,phone);
         sqLiteStatement.bindString(4,email);
         sqLiteStatement.executeInsert();
     }
-
+    public void addCustomer1(Customer customer){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Id,customer.getId());
+        contentValues.put(Name,customer.getName());
+        contentValues.put(Address,customer.getAddress());
+        contentValues.put(Email,customer.getEmail());
+        contentValues.put(Phone,customer.getPhone());
+        db.insert(TableName,null,contentValues);
+        db.close();
+    }
     public void updateCustomer (int id,Customer customer){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();

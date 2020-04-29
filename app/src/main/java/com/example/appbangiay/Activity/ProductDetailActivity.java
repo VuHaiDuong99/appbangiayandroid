@@ -124,7 +124,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnGioHang = findViewById(R.id.btnGioHang);
         imageView = findViewById(R.id.imageViewDetail);
         spinner = findViewById(R.id.spiner);
-        productsDB = new ProductsDB(this,"ProductsDB",null,1);
+        productsDB = new ProductsDB(this,"ProductsDB2",null,1);
         product = new Products();
         bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);

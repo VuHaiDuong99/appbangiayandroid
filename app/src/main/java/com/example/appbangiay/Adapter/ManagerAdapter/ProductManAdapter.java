@@ -1,4 +1,4 @@
-package com.example.appbangiay.Adapter;
+package com.example.appbangiay.Adapter.ManagerAdapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,21 +10,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.appbangiay.Adapter.ListProductAdapter;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ListProductAdapter extends BaseAdapter {
+public class ProductManAdapter extends BaseAdapter {
     private ArrayList<Products> data;
     private Context context;
-    public void setData(ArrayList<Products> data){
-        this.data = data;
-    }
-    public ListProductAdapter(ArrayList<Products> listProduct, Context context) {
+
+    public ProductManAdapter(ArrayList<Products> listProduct, Context context) {
         this.data = listProduct;
         this.context = context;
     }
@@ -50,18 +47,18 @@ public class ListProductAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ProductManAdapter.ViewHolder viewHolder = null;
         if (convertView == null){
-            viewHolder = new ViewHolder();
+            viewHolder = new ProductManAdapter.ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.dong_product_layout,null);
-            viewHolder.txtName = convertView.findViewById(R.id.txtNameProduct);
-            viewHolder.txtPrice = convertView.findViewById(R.id.txtPriceProduct);
-            viewHolder.imageView = convertView.findViewById(R.id.imageViewProduct);
+            convertView = layoutInflater.inflate(R.layout.dong_product_manager_layout,null);
+            viewHolder.txtName = convertView.findViewById(R.id.txtNameProductMan);
+            viewHolder.txtPrice = convertView.findViewById(R.id.txtPriceProductMan);
+            viewHolder.imageView = convertView.findViewById(R.id.imageViewProductMan);
             convertView.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ProductManAdapter.ViewHolder) convertView.getTag();
 
         }
         // gan gia tri

@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 
+import com.example.appbangiay.Activity.Manager.ListCustomer;
+import com.example.appbangiay.Activity.Manager.ProductManager;
 import com.example.appbangiay.Adapter.ProductsAdapter;
 import com.example.appbangiay.DataBase.ProductsDB;
 import com.example.appbangiay.Model.Cart;
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.id_reView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
-        productsDB = new ProductsDB(this,"ProductsDB",null,1);
+        productsDB = new ProductsDB(this,"ProductsDB4",null,1);
         listProducts = new ArrayList<Products>();
         listProducts = productsDB.getAllProductsNew();
         adapter = new ProductsAdapter(getApplicationContext(),listProducts);
@@ -117,13 +119,11 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent3);
                             break;
                         case R.id.nav_Account:
-                            Intent intent4 = new Intent(MainActivity.this, AdminActivity.class);
+                            Intent intent4 = new Intent(MainActivity.this, ProductManager.class);
                             startActivity(intent4);
                             break;
                     }
                     return false;
                 }
             };
-
-
 }

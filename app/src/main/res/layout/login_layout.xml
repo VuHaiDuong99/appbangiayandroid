@@ -11,22 +11,23 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/edit_text"
         android:hint="Enter name"
-        android:id="@+id/txtName"
+        android:id="@+id/txtNameLogin"
         android:layout_marginTop="150dp"
         ></EditText>
 
     <EditText
-        android:id="@+id/txtDescription"
+        android:id="@+id/txtPasswordLogin"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:background="@drawable/edit_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
-        android:hint="Enter description"
+        android:hint="Enter password"
 
         ></EditText>
 
     <Button
+        android:id="@+id/btnLogin"
         android:background="@drawable/edit_button"
         android:layout_height="40dp"
         android:layout_width="300dp"

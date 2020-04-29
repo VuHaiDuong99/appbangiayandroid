@@ -15,7 +15,7 @@ import com.example.appbangiay.Model.Products;
 import java.util.ArrayList;
 
 public class ProductsDB extends SQLiteOpenHelper {
-    public static final String TableName ="ProductsDB";
+    public static final String TableName ="ProductsDB4";
     public static final String Id ="Id";
     public static final String Name ="Name";
     public static final String Image = "Image";
@@ -93,7 +93,6 @@ public class ProductsDB extends SQLiteOpenHelper {
             }
         }
         return products;
-
     }
     public ArrayList<Products> getProductByCategory(int category_id){
         ArrayList<Products> list = new ArrayList<>();
@@ -110,7 +109,6 @@ public class ProductsDB extends SQLiteOpenHelper {
             }
         }
         return list;
-
     }
     public void addProduct(Products product){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -126,7 +124,7 @@ public class ProductsDB extends SQLiteOpenHelper {
     }
     public void addProduct1(String name,String description,Integer price,byte[] image,int category){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql ="Insert into ProductsDB values (null,?,?,?,?,?)";
+        String sql ="Insert into ProductsDB4 values (null,?,?,?,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
         sqLiteStatement.bindString(1,name);
@@ -136,8 +134,8 @@ public class ProductsDB extends SQLiteOpenHelper {
         sqLiteStatement.bindDouble(5,category);
         sqLiteStatement.executeInsert();
     }
-    // Sua Category
-    public void updateCategory (int id, Products product){
+    // Sua Product
+    public void updateProduct (int id, Products product){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Id,product.getId());
@@ -154,5 +152,19 @@ public class ProductsDB extends SQLiteOpenHelper {
         String sql = " Delete From "+ TableName+" where Id =" + id;
         db.execSQL(sql);
         db.close();
+    }
+    public byte[] getImage(int id){
+        byte[] image = null;
+        ArrayList<Products> list = new ArrayList<>();
+        String sql = "Select Image from "+ TableName+" where Id = "+id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        // taoj list der tra ve
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                image = cursor.getBlob(cursor.getColumnIndex("Image"));
+            }
+        }
+        return image;
     }
 }

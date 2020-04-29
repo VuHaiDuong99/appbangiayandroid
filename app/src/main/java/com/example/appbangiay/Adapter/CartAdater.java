@@ -77,6 +77,7 @@ public class CartAdater extends BaseAdapter {
         }
         // gan gia tri
         final Cart cart = (Cart) getItem(position);
+
         viewHolder.txtName.setText(cart.getName());
         viewHolder.txtCount.setText(Integer.toString(cart.getCountProduct()));
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -95,7 +96,6 @@ public class CartAdater extends BaseAdapter {
                int slhientai = Integer.parseInt(finalViewHolder.txtCount.getText().toString());
                cart.setCountProduct(slmoi);
                MainActivity.listCart.get(position).setPrice((cart.getPrice()*slmoi)/slhientai);
-
                resetData();
                tinhTongTien();
 

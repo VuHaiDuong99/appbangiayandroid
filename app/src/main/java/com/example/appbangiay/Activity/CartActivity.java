@@ -28,6 +28,7 @@ public class CartActivity extends AppCompatActivity {
     public static CartAdater adater;
     private ListView listView;
     private ArrayList<Cart> listCart;
+    public static long tongtien=0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_layout);
@@ -52,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
         adater.notifyDataSetChanged();
     }
     public static void tinhTongTien() {
-        long tongtien=0;
+
         for(int i=0;i<MainActivity.listCart.size();i++){
             tongtien += MainActivity.listCart.get(i).getPrice();
         }

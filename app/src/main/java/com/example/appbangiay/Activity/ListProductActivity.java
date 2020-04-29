@@ -71,7 +71,7 @@ public class ListProductActivity extends AppCompatActivity {
     private void AnhXa() {
         listView = findViewById(R.id.listViewProduct);
         listProduct = new ArrayList<Products>();
-        productsDB = new ProductsDB(this,"ProductsDB",null,1);
+        productsDB = new ProductsDB(this,"ProductsDB2",null,1);
         bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
     }

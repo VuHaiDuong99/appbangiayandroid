@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.appbangiay.Model.Category;
+import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ import java.util.ArrayList;
 public class CategoryAdapter extends BaseAdapter {
     private ArrayList<Category> listCategory;
     private Context context;
-
+    public void setData(ArrayList<Category> data){
+        this.listCategory = data;
+    }
     public CategoryAdapter(ArrayList<Category> listCategory, Context context) {
         this.listCategory = listCategory;
         this.context = context;
@@ -62,9 +65,9 @@ public class CategoryAdapter extends BaseAdapter {
         }
         Category category = (Category) getItem(position);
         viewHolder.txtNameCategory.setText(category.getName());
-        /*byte[] image = category.getImage();
+        byte[] image = category.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
-        viewHolder.imageView.setImageBitmap(bitmap);*/
+        viewHolder.imageView.setImageBitmap(bitmap);
         return convertView;
     }
 }

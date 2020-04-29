@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AddCategoryActivity"></activity>
+
+
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +25,7 @@
             android:name=".Activity.CategoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddProductActivity"
+            android:name=".Activity.Manager.AddProductActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ListProductActivity"
@@ -40,6 +41,21 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.AdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.ProductManager"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.ListCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.DetailCartManager"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.AddCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.CategoryManagerActivity"
             android:screenOrientation="portrait" />
     </application>
 

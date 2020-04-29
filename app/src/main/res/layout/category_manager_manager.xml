@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="#8BC34A"
+        android:fontFamily="@string/fab_transformation_scrim_behavior"
+        android:gravity="center"
+        android:hint="Danh Mục Sản Phẩm"
+        android:textSize="30dp"></TextView>
+
+    <ListView
+        android:id="@+id/listViewCategoryMan"
+        android:layout_width="match_parent"
+        android:layout_height="528dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:dividerHeight="10.0sp"></ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAddMan"
+            android:layout_width="163dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edit_button"
+            android:text="Thêm"
+            android:layout_marginLeft="5dp"></Button>
+        <Button
+        android:id="@+id/btnExit"
+        android:layout_width="163dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_button"
+        android:text="Quay Lại"
+        android:layout_marginLeft="55dp"></Button>
+
+    </LinearLayout>
+
+</LinearLayout>
