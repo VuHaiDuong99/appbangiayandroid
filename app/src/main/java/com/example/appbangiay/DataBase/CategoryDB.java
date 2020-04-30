@@ -15,7 +15,7 @@ import com.example.appbangiay.Model.Products;
 import java.util.ArrayList;
 
 public class CategoryDB extends SQLiteOpenHelper {
-    public static final String TableName ="CategoryDB2";
+    public static final String TableName ="CategoryDB3";
     public static final String Id ="Id";
     public static final String Name ="Name";
     public static final String Image = "Image";
@@ -57,7 +57,7 @@ public class CategoryDB extends SQLiteOpenHelper {
     }
     public void addCategory(String name,byte[] image){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql ="Insert into CategoryDB2 values (null,?,?)";
+        String sql ="Insert into CategoryDB3 values (null,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
         sqLiteStatement.bindString(1,name);

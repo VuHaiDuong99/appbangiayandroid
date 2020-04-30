@@ -29,7 +29,7 @@ import java.io.InputStream;
 public class AddCategoryActivity extends AppCompatActivity {
     private CategoryDB categoryDB;
     private EditText txtName;
-    private Button btnImage,btnAdd,btnEdit;
+    private Button btnImage,btnAdd,btnEdit,btnExit;
     private ImageView imageView;
     public int Request_code_camera = 123;
     private int info,id;
@@ -42,9 +42,14 @@ public class AddCategoryActivity extends AppCompatActivity {
         ClickButton();
         onClickButtonImage();
         onClickButtonAdd();
-        onClickButtonEdit();
-    }
+        //onClickButtonEdit();
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+    }
     private void onClickButtonEdit() {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,44 +68,44 @@ public class AddCategoryActivity extends AppCompatActivity {
         });
     }
     private void getData() {
-        if(info == 1){
             Intent intent = getIntent();
             Bundle bundle = intent.getExtras();
             if(bundle!= null){
                 // đặt dữ liệu lên cac component
-                id = bundle.getInt("id");
+               // id = bundle.getInt("id");
                 txtName.setText(bundle.getString("name"));
-                byte[] image = categoryDB.getImage(id);
+                byte[] image = bundle.getByteArray("image");
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
                 imageView.setImageBitmap(bitmap);
             }
-        }
+
     }
     private void ClickButton() {
 
-        if(info == 1 ){
-            btnAdd.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
-        }
-        else {
-            btnAdd.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
-        }
     }
 
     private void onClickButtonAdd() {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(AddCategoryActivity.this, CategoryManagerActivity.class);
+
+                Bundle bundle = new Bundle();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
                 byte[] imgeByte = baos.toByteArray();
-                categoryDB.addCategory(
-                        txtName.getText().toString().trim(),
-                        imgeByte
-                );
+                bundle.putString("name",txtName.getText().toString().trim());
+                bundle.putByteArray("image",imgeByte);
+                // đặt bundle lên intent
+                intent.putExtras(bundle);
+                // trả về intent cho activity main
+                setResult(200,intent);
+                // kết thúc
+
+                //startActivity(intent);
+                finish();
                 Toast.makeText(AddCategoryActivity.this,"Them thanh cong",Toast.LENGTH_SHORT).show();
             }
         });
@@ -118,15 +123,15 @@ public class AddCategoryActivity extends AppCompatActivity {
         });
     }
     private void AnhXa() {
-        info = getIntent().getIntExtra("Edit",-1);
-        categoryDB = new CategoryDB(this,"CategoryDB2",null,1);
+
+        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
         txtName = findViewById(R.id.txtNameAddCategory);
         imageView = findViewById(R.id.imageViewAddCategory);
         btnImage = findViewById(R.id.btnImageCategory);
+        btnExit = findViewById(R.id.btnExitCategory);
         btnAdd = findViewById(R.id.btnAddCategoryMan);
-        btnEdit = findViewById(R.id.btnEditCategoryMan);
-        btnAdd.setVisibility(View.INVISIBLE);
-        btnEdit.setVisibility(View.INVISIBLE);
+
+
 
     }
     @Override

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.appbangiay.Activity.MainActivity;
+import com.example.appbangiay.Model.Category;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,9 +41,45 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addproduct);
         AnhXa();
-
         getData();
-        bottomNavigationView.setOnNavigationItemSelectedListener(nav);
+        buttonImage();
+        buttonAdd();
+    }
+
+    private void buttonAdd() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this, ProductManager.class);
+
+                Bundle bundle = new Bundle();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                byte[] imgeByte = baos.toByteArray();
+                bundle.putString("name",txtName.getText().toString().trim());
+                bundle.putString("description",txtDescription.getText().toString().trim());
+                bundle.putInt("price",Integer.parseInt(txtPrice.getText().toString().trim()));
+                bundle.putInt("id_category",Integer.parseInt(txtCategory.getText().toString().trim()));
+                bundle.putByteArray("image",imgeByte);
+                // đặt bundle lên intent
+                intent.putExtras(bundle);
+                // trả về intent cho activity main
+                setResult(200,intent);
+                // kết thúc
+
+                //startActivity(intent);
+                finish();
+                Toast.makeText(AddProductActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
+               /* Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
+                startActivity(intent);*/
+            }
+        });
+    }
+
+
+    private void buttonImage() {
         btnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,80 +88,21 @@ public class AddProductActivity extends AppCompatActivity {
                 startActivityForResult(intent,Request_code_camera);
             }
         });
-        ClickButton();
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
-                byte[] imgeByte = baos.toByteArray();
-                MainActivity.productsDB.addProduct1(
-                        txtName.getText().toString().trim(),
-                        txtDescription.getText().toString().trim(),
-                        Integer.parseInt(txtPrice.getText().toString().trim()),
-                        imgeByte,
-                        Integer.parseInt(txtCategory.getText().toString().trim())
-                );
-
-                Toast.makeText(AddProductActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
-               /* Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
-                startActivity(intent);*/
-            }
-        });
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
-                byte[] imgeByte = baos.toByteArray();
-                Products products = new Products(id,txtName.getText().toString().trim(),
-                        txtDescription.getText().toString().trim(),
-                        Integer.parseInt(txtPrice.getText().toString().trim()),
-                        imgeByte,
-                        Integer.parseInt(txtCategory.getText().toString().trim()));
-                MainActivity.productsDB.updateProduct(id,products);
-
-                Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
-                startActivity(intent);
-            }
-
-        });
-
     }
-
-    private void ClickButton() {
-
-        if(info == 1 ){
-            btnAdd.setVisibility(View.INVISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
-        }
-        else {
-            btnAdd.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.INVISIBLE);
-        }
-    }
-
     private void getData() {
-        if(info == 1){
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!= null){
             // đặt dữ liệu lên cac component
-            id = bundle.getInt("id");
+
             txtName.setText(bundle.getString("name"));
             txtDescription.setText(bundle.getString("description"));
             txtPrice.setText(Integer.toString(bundle.getInt("price")));
             txtCategory.setText(Integer.toString(bundle.getInt("id_category")));
-            byte[] image = MainActivity.productsDB.getImage(id);
+            byte[] image = bundle.getByteArray("image");
             Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
             imageView.setImageBitmap(bitmap);
         }
-        }
-
     }
 
     @Override
@@ -153,33 +131,6 @@ public class AddProductActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         btnImage = findViewById(R.id.btnImage);
         btnAdd = findViewById(R.id.btnAdd);
-        btnEdit = findViewById(R.id.btnEdit);
-        btnAdd.setVisibility(View.INVISIBLE);
-        btnEdit.setVisibility(View.INVISIBLE);
-        info = getIntent().getIntExtra("Edit",-1);
-        bottomNavigationView = findViewById(R.id.botton_nav);
 
     }
-    private BottomNavigationView.OnNavigationItemSelectedListener nav =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment fragment = null;
-                    //AppCompatActivity appCompatActivity = null;
-                    switch (menuItem.getItemId()){
-                        case R.id.nav_Home:
-                            Intent intent = new Intent(AddProductActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            break;
-
-                        case R.id.nav_Account:
-                            Intent intent1 = new Intent(AddProductActivity.this,MainActivity.class);
-                            startActivity(intent1);
-                            break;
-
-                    }
-                    return false;
-
-                }
-            };
 }

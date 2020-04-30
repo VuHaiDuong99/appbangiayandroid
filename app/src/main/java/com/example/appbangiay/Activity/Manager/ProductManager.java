@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -24,11 +25,11 @@ import com.example.appbangiay.Activity.MainActivity;
 import com.example.appbangiay.Activity.ProductDetailActivity;
 import com.example.appbangiay.Adapter.ListProductAdapter;
 import com.example.appbangiay.DataBase.ProductsDB;
+import com.example.appbangiay.Model.Category;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.ArrayList;
 
 public class ProductManager extends AppCompatActivity {
@@ -37,11 +38,11 @@ public class ProductManager extends AppCompatActivity {
     private ListView listViewBar;
     private ImageButton btnImage;
     private ArrayList<Products> listProduct;
-   // private ProductsDB productsDB;
+    private ProductsDB productsDB;
     private ListProductAdapter adapter;
     private ListView listView;
     private BottomNavigationView bottomNavigationView;
-    int dl;
+    public int id,dl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +56,7 @@ public class ProductManager extends AppCompatActivity {
         });
         getDataProducts();
        // ClickListView();
-
-
     }
-
     private void showMenu() {
         PopupMenu popupMenu = new PopupMenu(this,btnImage);
         popupMenu.getMenuInflater().inflate(R.menu.menu_manager,popupMenu.getMenu());
@@ -85,15 +83,13 @@ public class ProductManager extends AppCompatActivity {
                         break;
                     case R.id.menuAddProduct:
                         intent = new Intent(ProductManager.this, AddProductActivity.class);
-                        intent.putExtra("Edit",2);
-                        startActivity(intent);
+                        startActivityForResult(intent,100);
                         break;
                 }
                 return false;
             }
         });
         popupMenu.show();
-
     }
     private void getDataProducts() {
         listProduct = MainActivity.productsDB.getAllProducts();
@@ -101,35 +97,50 @@ public class ProductManager extends AppCompatActivity {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-    private void ClickListView() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ProductManager.this, AddProductActivity.class);
-                Products products = listProduct.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", products.getId());
-                intent.putExtras(bundle);
-                // goij activity moi
-                ProductManager.this.startActivityForResult(intent,200);
-            }
-        });
-    }
     private void AnhXa() {
         btnImage = findViewById(R.id.btnImageList);
         listView = findViewById(R.id.listViewProductMan);
         registerForContextMenu(listView);
         listProduct = new ArrayList<Products>();
-       // productsDB = new ProductsDB(this,"ProductsDB2",null,1);
         bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
-
     }
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.menu_listview_option, menu);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+            Bundle bundle = data.getExtras();
+            String name = bundle.getString("name");
+            String description = bundle.getString("description");
+            int price = bundle.getInt("price");
+            int idCategpry = bundle.getInt("id_category");
+            byte[] image = bundle.getByteArray("image");
+            MainActivity.productsDB.addProduct1(name,description,price,image,idCategpry);
+            listProduct =  MainActivity.productsDB.getAllProducts();
+            adapter.setData(listProduct);
+            adapter.notifyDataSetChanged();
+        }
+        if(requestCode==200 && resultCode == 200){
+            // laays duw lieu
 
+            Bundle bundle = data.getExtras();
+
+            String name = bundle.getString("name");
+            String description = bundle.getString("description");
+            int price = bundle.getInt("price");
+            int idCategpry = bundle.getInt("id_category");
+            byte[] image = bundle.getByteArray("image");
+            Products products = new Products(id,name,description,price,image,idCategpry);
+            MainActivity.productsDB.updateProduct(id,products);
+            listProduct =  MainActivity.productsDB.getAllProducts();
+            adapter.setData(listProduct);
+            adapter.notifyDataSetChanged();
+        }
     }
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -141,15 +152,14 @@ public class ProductManager extends AppCompatActivity {
                 intent = new Intent(ProductManager.this, AddProductActivity.class);
                 Products products = listProduct.get(selectId);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", products.getId());
+                id = products.getId();
                 bundle.putString("name",products.getName());
                 bundle.putString("description",products.getDescription());
                 bundle.putInt("price",products.getPrice());
                 bundle.putInt("id_category",products.getId_category());
+                bundle.putByteArray("image",products.getImage());
                 intent.putExtras(bundle);
-                intent.putExtra("Edit",1);
-                // goij activity moi
-                ProductManager.this.startActivity(intent);
+                ProductManager.this.startActivityForResult(intent,200);
                 break;
             case R.id.menuDelete:
                 int id = listProduct.get(selectId).getId();
@@ -174,7 +184,6 @@ public class ProductManager extends AppCompatActivity {
                             break;
                         case R.id.nav_Products:
                             Intent intent1 = new Intent(ProductManager.this,ListProductActivity.class);
-                            intent1.putExtra("abc",1);
                             startActivity(intent1);
                             break;
 

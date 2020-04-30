@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appbangiay.Activity.CategoryActivity;
@@ -32,6 +33,7 @@ public class CategoryManagerActivity extends AppCompatActivity {
     public  CategoryAdapter adapter;
     public  CategoryDB categoryDB;
     public static int idCategory;
+    public  int id;
     private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,33 @@ public class CategoryManagerActivity extends AppCompatActivity {
         AnhXa();
         ClickButtonAdd();
         clickButtonQuayLai();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 200) {
+            Bundle bundle = data.getExtras();
+            String name = bundle.getString("name");
+            byte[] image = bundle.getByteArray("image");
+            categoryDB.addCategory(name,image);
+            listCategory = categoryDB.getAllCategory();
+            adapter.setData(listCategory);
+            adapter.notifyDataSetChanged();
+        }
+        if(requestCode==200 && resultCode == 200){
+            // laays duw lieu
+
+            Bundle bundle = data.getExtras();
+            //int id = bundle.getInt("id");
+            String name = bundle.getString("name");
+            byte[] image = bundle.getByteArray("image");
+            Category category = new Category(id,name,image);
+            categoryDB.updateCategory(id,category);
+            listCategory = categoryDB.getAllCategory();
+            adapter.setData(listCategory);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void clickButtonQuayLai() {
@@ -57,8 +86,8 @@ public class CategoryManagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryManagerActivity.this,AddCategoryActivity.class);
-                intent.putExtra("Edit",2);
-                startActivity(intent);
+                //intent.putExtra("Edit",2);
+                CategoryManagerActivity.this.startActivityForResult(intent,100);
             }
         });
     }
@@ -78,12 +107,13 @@ public class CategoryManagerActivity extends AppCompatActivity {
                 intent = new Intent(CategoryManagerActivity.this, AddCategoryActivity.class);
                 Category category = listCategory.get(selectId);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", category.getId());
+                id = category.getId();
                 bundle.putString("name",category.getName());
+                bundle.putByteArray("image",category.getImage());
                 intent.putExtras(bundle);
-                intent.putExtra("Edit",1);
+                //intent.putExtra("Edit",1);
                 // goij activity moi
-                CategoryManagerActivity.this.startActivity(intent);
+                CategoryManagerActivity.this.startActivityForResult(intent,200);
                 break;
             case R.id.menuDelete:
                 int id = listCategory.get(selectId).getId();
@@ -98,7 +128,7 @@ public class CategoryManagerActivity extends AppCompatActivity {
     private void AnhXa() {
         btnQuayLai = findViewById(R.id.btnExit);
         btnAdd = findViewById(R.id.btnAddMan);
-        categoryDB = new CategoryDB(this,"CategoryDB2",null,1);
+        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
         listView = findViewById(R.id.listViewCategoryMan);
         registerForContextMenu(listView);
         listCategory = new ArrayList<Category>();
