@@ -53,32 +53,26 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         android:hint="Enter Price"
-
+        android:inputType="number"
         ></EditText>
-    <EditText
-        android:id="@+id/txtCategory"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edit_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:hint="Enter Category"
 
-        ></EditText>
     <TextView
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="104dp"
         android:layout_height="56dp"
         android:hint="Image : "
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="300dp"
         android:gravity="center"
-        android:layout_marginLeft="22dp"></TextView>
+        android:layout_marginLeft="32dp"></TextView>
     <ImageView
+
         android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@android:color/darker_gray"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="300dp"
         ></ImageView>
 
     <Button
@@ -86,16 +80,26 @@
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginLeft="280dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/edit_button"
         android:text="Tải lên"></Button>
+    <TextView
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:hint="Category :"
+        android:layout_marginTop="380dp"
+        android:gravity="center"
+        android:layout_marginLeft="42dp"></TextView>
     <Spinner
         android:id="@+id/listCategorySpiner"
         android:background="@drawable/custom_spinner"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="170dp"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginTop="450dp"></Spinner>
+        android:layout_marginTop="380dp"
+        ></Spinner>
     <Button
         android:background="@drawable/edit_button"
         android:layout_height="40dp"

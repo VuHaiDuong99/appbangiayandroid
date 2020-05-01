@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import com.example.appbangiay.Model.Category;
 import com.example.appbangiay.Model.Products;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class CategoryDB extends SQLiteOpenHelper {
@@ -107,5 +109,18 @@ public class CategoryDB extends SQLiteOpenHelper {
             }
         }
         return list;
+    }
+    public Integer getIdCustomer(String name){
+        int id = 0;
+        String sql = "Select Id from " + TableName + " where Name = +'"+name+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        // taoj list der tra ve
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+              id = cursor.getInt(cursor.getColumnIndex("Id"));
+            }
+        }
+        return id;
     }
 }

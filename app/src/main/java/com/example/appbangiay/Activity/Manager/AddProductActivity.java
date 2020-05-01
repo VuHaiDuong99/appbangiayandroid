@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -86,22 +87,24 @@ public class AddProductActivity extends AppCompatActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
                 byte[] imgeByte = baos.toByteArray();
+                int id = categoryDB.getIdCustomer(spinner.getSelectedItem().toString());
+                Log.e("idCategory",Integer.toString(id));
                 bundle.putString("name",txtName.getText().toString().trim());
                 bundle.putString("description",txtDescription.getText().toString().trim());
                 bundle.putInt("price",Integer.parseInt(txtPrice.getText().toString().trim()));
-                bundle.putInt("id_category",Integer.parseInt(txtCategory.getText().toString().trim()));
+                bundle.putInt("id_category",id);
                 bundle.putByteArray("image",imgeByte);
+
                 // đặt bundle lên intent
                 intent.putExtras(bundle);
                 // trả về intent cho activity main
                 setResult(200,intent);
                 // kết thúc
-
+//                startActivity(intent);
                 //startActivity(intent);
                 finish();
                 Toast.makeText(AddProductActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
-               /* Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
-                startActivity(intent);*/
+
             }
         });
     }
@@ -154,7 +157,6 @@ public class AddProductActivity extends AppCompatActivity {
         categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
         spinner = findViewById(R.id.listCategorySpiner);
         btnBack = findViewById(R.id.idBackAddPro);
-        txtCategory = findViewById(R.id.txtCategory);
         txtName = findViewById(R.id.txtName);
         txtPrice= findViewById(R.id.txtPrice);
         txtDescription = findViewById(R.id.txtDescription);

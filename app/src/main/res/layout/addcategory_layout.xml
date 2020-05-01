@@ -36,6 +36,8 @@
         android:layout_marginTop="150dp"
         ></EditText>
     <TextView
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_width="104dp"
         android:layout_height="56dp"
         android:hint="Image : "
