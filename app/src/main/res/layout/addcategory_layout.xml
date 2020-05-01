@@ -3,15 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_gravity="center"
-        android:background="#5EFFA407"
-        android:textSize="20dp"
-        android:fontFamily="@string/fab_transformation_scrim_behavior"
-        android:gravity="center"
-        android:hint="Thêm Danh Mục Sản Phẩm"></TextView>
+        android:layout_height="52dp"
+        android:background="#8BC34A">
+        <ImageButton
+            android:id="@+id/idBackAddCategory"
+            android:layout_gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            ></ImageButton>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="#8BC34A"
+            android:fontFamily="@string/fab_transformation_scrim_behavior"
+            android:gravity="center"
+            android:hint="Thêm Danh Mục Sản Phẩm"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+    </LinearLayout>
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -46,19 +60,12 @@
         android:layout_marginTop="250dp"
         android:background="@drawable/edit_button"
         android:text="Tải lên"></Button>
+
     <Button
         android:background="@drawable/edit_button"
         android:layout_height="40dp"
         android:layout_width="300dp"
-        android:text="Exit"
-        android:id="@+id/btnExitCategory"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"></Button>
-    <Button
-        android:background="@drawable/edit_button"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:text="Thêm"
+        android:text="Save"
         android:id="@+id/btnAddCategoryMan"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"></Button>

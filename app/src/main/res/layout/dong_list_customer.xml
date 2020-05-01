@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_listview"
+    >
 
     <TextView
         android:id="@+id/txtNameCustomer"
         android:layout_width="221dp"
-        android:layout_height="91dp"
+        android:layout_height="100dp"
         android:gravity="center"
         android:text="Name"
-        android:textSize="20dp"></TextView>
-
-    <TextView
-        android:textSize="20dp"
-        android:id="@+id/txtTongTienCustomer"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:gravity="center"
-        android:text="Address"></TextView>
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="20dp"
+            android:id="@+id/txtAddressCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Address"
+            android:textStyle="italic"
+            android:layout_margin="5dp"></TextView>
+
+        <TextView
+            android:id="@+id/txtPhoneCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Phone"
+            android:textColor="#E91E63"
+            android:textSize="20dp"
+            android:textStyle="italic"></TextView>
+    </LinearLayout>
+
 </LinearLayout>

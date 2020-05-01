@@ -56,7 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewCategory);
         bottomNavigationView = findViewById(R.id.botton_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
-        categoryDB = new CategoryDB(this,"CategoryDB2",null,1);
+        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
         listCategory = new ArrayList<Category>();
         //Category category1 = new Category(1,"giay au",null);
         // category = new Category(2,"giay luoi",null);

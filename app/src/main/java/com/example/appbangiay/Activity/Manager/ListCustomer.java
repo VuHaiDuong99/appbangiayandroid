@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.example.appbangiay.R;
 import java.util.ArrayList;
 
 public class ListCustomer extends AppCompatActivity {
+    public ImageButton back;
     public  CustomerDB customerDB;
     private ListView listView;
     private ListCustomerAdapter adapter;
@@ -29,7 +32,19 @@ public class ListCustomer extends AppCompatActivity {
         setContentView(R.layout.list_customer_manager);
         AnhXa();
         listViewClick();
+        onclickBack();
     }
+
+    private void onclickBack() {
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListCustomer.this,ProductManager.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void listViewClick() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,6 +59,7 @@ public class ListCustomer extends AppCompatActivity {
 });
     }
     private void AnhXa() {
+        back = findViewById(R.id.idBackDS);
         listView = findViewById(R.id.lisViewCustomer);
         list = new ArrayList<Customer>();
         donHangDB = new DonHangDB(this,"DonHangDB1",null,1);

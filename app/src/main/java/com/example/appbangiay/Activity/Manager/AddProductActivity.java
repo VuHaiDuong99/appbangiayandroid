@@ -8,9 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.appbangiay.Activity.MainActivity;
+import com.example.appbangiay.DataBase.CategoryDB;
+import com.example.appbangiay.DataBase.CustomerDB;
 import com.example.appbangiay.Model.Category;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
@@ -27,9 +32,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddProductActivity extends AppCompatActivity {
-
+    public CategoryDB categoryDB;
+    public Spinner spinner;
+    private ImageButton btnBack;
     private BottomNavigationView bottomNavigationView;
     private EditText txtName,txtDescription,txtPrice, txtCategory;
     private ImageView imageView;
@@ -42,8 +51,27 @@ public class AddProductActivity extends AppCompatActivity {
         setContentView(R.layout.addproduct);
         AnhXa();
         getData();
+        getDataCustomer();
         buttonImage();
         buttonAdd();
+        onClickBack();
+    }
+
+    private void getDataCustomer() {
+        ArrayList<String> list = new ArrayList<String>();
+        list  =categoryDB.getNameCateogry();
+        ArrayAdapter<String> list1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,list);
+        spinner.setAdapter(list1);
+    }
+
+    private void onClickBack() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void buttonAdd() {
@@ -123,7 +151,9 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
-
+        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
+        spinner = findViewById(R.id.listCategorySpiner);
+        btnBack = findViewById(R.id.idBackAddPro);
         txtCategory = findViewById(R.id.txtCategory);
         txtName = findViewById(R.id.txtName);
         txtPrice= findViewById(R.id.txtPrice);

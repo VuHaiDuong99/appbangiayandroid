@@ -100,4 +100,6 @@ public class CustomerDB extends SQLiteOpenHelper {
         db.execSQL(sql);
         db.close();
     }
+
+
 }

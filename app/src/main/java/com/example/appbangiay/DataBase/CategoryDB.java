@@ -94,4 +94,18 @@ public class CategoryDB extends SQLiteOpenHelper {
         }
         return image;
     }
+    public ArrayList<String> getNameCateogry(){
+        ArrayList<String> list = new ArrayList<>();
+        String sql = "Select Name from " + TableName;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        // taoj list der tra ve
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("Name"));
+                list.add(name);
+            }
+        }
+        return list;
+    }
 }

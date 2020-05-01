@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class CategoryManagerActivity extends AppCompatActivity {
+    public ImageButton btnBack;
     private Button btnAdd,btnQuayLai;
     private ListView listView;
     private Category category;
@@ -42,6 +44,18 @@ public class CategoryManagerActivity extends AppCompatActivity {
         AnhXa();
         ClickButtonAdd();
         clickButtonQuayLai();
+        clickBack();
+    }
+
+    private void clickBack() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryManagerActivity.this,ProductManager.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -126,6 +140,7 @@ public class CategoryManagerActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
     private void AnhXa() {
+        btnBack = findViewById(R.id.idBackCategory);
         btnQuayLai = findViewById(R.id.btnExit);
         btnAdd = findViewById(R.id.btnAddMan);
         categoryDB = new CategoryDB(this,"CategoryDB3",null,1);

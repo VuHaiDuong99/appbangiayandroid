@@ -2,8 +2,10 @@ package com.example.appbangiay.Activity.Manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class DetailCartManager extends AppCompatActivity {
+    public ImageButton btnBack;
     private DonHangDB donHangDB;
     private ChiTietDonHangDB chiTietDonHangDB;
     private ArrayList<ChiTietDonHang> listChiTiet;
@@ -32,6 +35,12 @@ public class DetailCartManager extends AppCompatActivity {
         AnhXa();
         getData();
         getTongTien();
+        onClickBack();
+    }
+
+    private void onClickBack() {
+        Intent intent = new Intent(DetailCartManager.this,ListCustomer.class);
+        startActivity(intent);
     }
 
     private void getTongTien() {
@@ -51,6 +60,7 @@ public class DetailCartManager extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
     private void AnhXa() {
+        btnBack = findViewById(R.id.idBackDonHang);
         tongTien = findViewById(R.id.tongTienCartMan);
         listView = findViewById(R.id.lisViewCartDetail);
         chiTietDonHangDB = new ChiTietDonHangDB(this,"ChiTietDonHangDB1",null,1);

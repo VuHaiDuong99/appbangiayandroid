@@ -1,5 +1,6 @@
 package com.example.appbangiay.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -58,9 +59,9 @@ public class CustomerActivity extends AppCompatActivity {
                                 MainActivity.listCart.get(i).getId()
                                 );
                     }
-
-
                     Toast.makeText(CustomerActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CustomerActivity.this,MainActivity.class);
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(CustomerActivity.this,"Không có sản phẩm ",Toast.LENGTH_SHORT).show();

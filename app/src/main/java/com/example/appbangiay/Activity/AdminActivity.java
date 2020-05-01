@@ -34,7 +34,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(txtName.getText().toString().equals("admin") == true && txtPass.getText().toString().equals("123456") == true){
                     Toast.makeText(AdminActivity.this,"Đăng Nhập Thành Công",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AdminActivity.this, AddProductActivity.class);
+                    Intent intent = new Intent(AdminActivity.this, ProductManager.class);
                     startActivity(intent);
                 }
                 else{

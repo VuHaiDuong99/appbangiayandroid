@@ -60,17 +60,10 @@ public class DetailCarAdapter extends BaseAdapter {
         }
         else {
             viewHolder = (DetailCarAdapter.ViewHolder) convertView.getTag();
-
         }
         // gan gia tri
         final ChiTietDonHang ctDonHang = (ChiTietDonHang) getItem(position);
         viewHolder.txtName.setText(ctDonHang.getNameProduct());
-        //viewHolder.txtTongTien.setText(customer.getAddress());
         viewHolder.txtSoLuong.setText(Integer.toString(ctDonHang.getIdDonHang()));
-        /*DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtGiaTien.setText("Giá : " + decimalFormat.format(Double.toString(ctDonHang.getGiaTien()))+"Đ");*/
-        // image
-        // chuyen byte[] sang bitmap
-
         return convertView;
 }}

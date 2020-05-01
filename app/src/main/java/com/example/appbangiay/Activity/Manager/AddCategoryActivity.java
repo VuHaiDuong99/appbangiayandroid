@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class AddCategoryActivity extends AppCompatActivity {
+    public ImageButton btnBack;
     private CategoryDB categoryDB;
     private EditText txtName;
     private Button btnImage,btnAdd,btnEdit,btnExit;
@@ -43,13 +45,20 @@ public class AddCategoryActivity extends AppCompatActivity {
         onClickButtonImage();
         onClickButtonAdd();
         //onClickButtonEdit();
-        btnExit.setOnClickListener(new View.OnClickListener() {
+        onClickBack();
+
+    }
+
+    private void onClickBack() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(AddCategoryActivity.this,CategoryManagerActivity.class);
+                startActivity(intent);
             }
         });
     }
+
     private void onClickButtonEdit() {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +137,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txtNameAddCategory);
         imageView = findViewById(R.id.imageViewAddCategory);
         btnImage = findViewById(R.id.btnImageCategory);
-        btnExit = findViewById(R.id.btnExitCategory);
+        btnBack = findViewById(R.id.idBackAddCategory);
         btnAdd = findViewById(R.id.btnAddCategoryMan);
 
 

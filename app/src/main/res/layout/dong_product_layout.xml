@@ -26,7 +26,7 @@
             ></TextView>
         <TextView
             android:layout_marginTop="5dp"
-            android:text="Tên sản phẩm : "
+            android:text="Giá sản phẩm : "
             android:id="@+id/txtPriceProduct"
             android:layout_width="match_parent"
             android:layout_height="45dp"

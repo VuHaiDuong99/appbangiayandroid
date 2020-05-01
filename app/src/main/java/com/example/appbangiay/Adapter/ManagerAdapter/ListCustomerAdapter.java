@@ -53,10 +53,8 @@ public class ListCustomerAdapter extends BaseAdapter {
 
     public class  ViewHolder{
        public TextView txtName;
-       public TextView txtTongTien;
-
+       public TextView txtAddress,txtPhone;
     }
-
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
         donHangDB = new DonHangDB(context,"DonHangDB1",null,1);
@@ -66,26 +64,18 @@ public class ListCustomerAdapter extends BaseAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.dong_list_customer,null);
             viewHolder.txtName = convertView.findViewById(R.id.txtNameCustomer);
-            viewHolder.txtTongTien = convertView.findViewById(R.id.txtTongTienCustomer);
+            viewHolder.txtAddress = convertView.findViewById(R.id.txtAddressCustomer);
+            viewHolder.txtPhone = convertView.findViewById(R.id.txtPhoneCustomer);
 
             convertView.setTag(viewHolder);
         }
         else {
             viewHolder = (ListCustomerAdapter.ViewHolder) convertView.getTag();
-
         }
         // gan gia tri
         final Customer customer = (Customer) getItem(position);
         viewHolder.txtName.setText(customer.getName());
-        //viewHolder.txtTongTien.setText(customer.getAddress());
-       /* int id = customer.getId();
-        Double tongtien = donHangDB.getTongTien(id);
-
-        viewHolder.txtTongTien.setText(Double.toString(tongtien));*/
-        /*DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtTongTien.setText("Giá : " + decimalFormat.format(Double.toString(tongtien))+"Đ");*/
-        // image
-        // chuyen byte[] sang bitmap
-
+        viewHolder.txtAddress.setText(customer.getAddress());
+        viewHolder.txtPhone.setText(customer.getPhone());
         return convertView;
 }}

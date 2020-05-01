@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent3);
                             break;
                         case R.id.nav_Account:
-                            Intent intent4 = new Intent(MainActivity.this, ProductManager.class);
+                            Intent intent4 = new Intent(MainActivity.this, AdminActivity.class);
                             startActivity(intent4);
                             break;
                     }
