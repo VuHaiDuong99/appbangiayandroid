@@ -49,13 +49,13 @@
             android:name=".Activity.Manager.ListCustomer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Manager.DetailCartManager"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Activity.Manager.AddCategoryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Manager.CategoryManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Manager.DetailCartActivity1"
             android:screenOrientation="portrait" />
     </application>
 

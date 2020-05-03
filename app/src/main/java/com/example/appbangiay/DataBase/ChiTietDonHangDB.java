@@ -88,7 +88,6 @@ public class ChiTietDonHangDB extends SQLiteOpenHelper {
                 list.add(ct);
 
             }
-
         }
         return list;
     }

@@ -49,9 +49,9 @@ public class ListCustomer extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ListCustomer.this, DetailCartActivity1.class);
                 int id_customer = list.get(position).getId();
                 int id_Donhang = donHangDB.getByIdDonHang(id_customer);
-                Intent intent = new Intent(ListCustomer.this, DetailCartManager.class);
                 intent.putExtra("idDonHang",id_Donhang);
                 intent.putExtra("idCutomer",id_customer);
                 startActivity(intent);

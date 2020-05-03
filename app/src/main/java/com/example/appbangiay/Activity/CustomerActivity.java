@@ -41,7 +41,6 @@ public class CustomerActivity extends AppCompatActivity {
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(MainActivity.listCart.size()>0){
                     int idCustomer = Integer.parseInt(txtId.getText().toString());
                     customerDB.addCustomer1(new Customer(Integer.parseInt(txtId.getText().toString()),txtName.getText().toString(),
@@ -49,7 +48,7 @@ public class CustomerActivity extends AppCompatActivity {
                             txtPhone.getText().toString(),
                             txtEmail.getText().toString())
                     );
-                    donHangDB.addDonHang(idCustomer,CartActivity.tongtien);
+                    donHangDB.addDonHang(idCustomer,CartActivity.tinhTongTien());
                     int idDonHang = donHangDB.getByIdDonHang(idCustomer);
                     Log.e("idDonHang",Integer.toString(idDonHang));
                     for(int i =0 ;i< MainActivity.listCart.size();i++){
@@ -66,7 +65,6 @@ public class CustomerActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(CustomerActivity.this,"Không có sản phẩm ",Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
@@ -78,7 +76,6 @@ public class CustomerActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPhone = findViewById(R.id.txtPhone);
         customerDB = new CustomerDB(this,"CustomerDB1",null,1);
-        //customer = new Customer();
         donHangDB = new DonHangDB(this,"DonHangDB1",null,1);
         chiTietDonHangDB = new ChiTietDonHangDB(this,"ChiTietDonHangDB1",null,1);
 

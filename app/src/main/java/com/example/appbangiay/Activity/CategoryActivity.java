@@ -39,7 +39,6 @@ public class CategoryActivity extends AppCompatActivity {
         AnhXa();
         ListViewClick();
     }
-
     private void ListViewClick() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -51,7 +50,6 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
     }
-
     public void AnhXa(){
         listView = findViewById(R.id.listViewCategory);
         bottomNavigationView = findViewById(R.id.botton_nav);

@@ -28,7 +28,7 @@ public class CartActivity extends AppCompatActivity {
     public static CartAdater adater;
     private ListView listView;
     private ArrayList<Cart> listCart;
-    public static long tongtien=0;
+   // public static long tongtien=0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_layout);
@@ -52,13 +52,15 @@ public class CartActivity extends AppCompatActivity {
     public static void resetData(){
         adater.notifyDataSetChanged();
     }
-    public static void tinhTongTien() {
-
+    public static double tinhTongTien() {
+        double tongtien=0;
+        resetData();
         for(int i=0;i<MainActivity.listCart.size();i++){
             tongtien += MainActivity.listCart.get(i).getPrice();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tongTien.setText("Giá : " + decimalFormat.format(tongtien)+"Đ");
+        return tongtien;
 
     }
 

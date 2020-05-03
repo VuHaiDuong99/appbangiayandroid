@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AnhXa();
         ActionViewFiler();
-
     }
     private void ActionViewFiler() {
         ArrayList<String> imageQuangCao = new ArrayList<>();

@@ -18,36 +18,28 @@ import java.util.ArrayList;
 
 public class DetailCarAdapter extends BaseAdapter {
     Context context;
-
     private ArrayList<ChiTietDonHang> listCT;
-
     public DetailCarAdapter(Context context, ArrayList<ChiTietDonHang> listCT) {
         this.context = context;
         this.listCT = listCT;
     }
-
     @Override
     public int getCount() {
         return listCT.size();
     }
-
     @Override
     public Object getItem(int position) {
         return listCT.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return position;
     }
-
     public class  ViewHolder{
         public TextView txtName,txtSoLuong,txtGiaTien;
     }
-
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-
         DetailCarAdapter.ViewHolder viewHolder = null;
         if (convertView == null){
             viewHolder = new DetailCarAdapter.ViewHolder();
@@ -64,6 +56,9 @@ public class DetailCarAdapter extends BaseAdapter {
         // gan gia tri
         final ChiTietDonHang ctDonHang = (ChiTietDonHang) getItem(position);
         viewHolder.txtName.setText(ctDonHang.getNameProduct());
-        viewHolder.txtSoLuong.setText(Integer.toString(ctDonHang.getIdDonHang()));
+        viewHolder.txtSoLuong.setText(Integer.toString(ctDonHang.getSoluong()));
+      //  viewHolder.txtGiaTien.setText(Double.toString(ctDonHang.getGiaTien()));
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        viewHolder.txtGiaTien.setText("Giá : " + decimalFormat.format(ctDonHang.getGiaTien())+"Đ");
         return convertView;
 }}
