@@ -8,13 +8,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Danh Mục Sản Phẩm"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="30dp"
-            android:background="#5EFFA407"
+            android:background="#8BC34A"
             android:fontFamily="@string/fab_transformation_scrim_behavior"
             ></TextView>
         <ListView

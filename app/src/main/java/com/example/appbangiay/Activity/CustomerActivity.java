@@ -75,7 +75,7 @@ public class CustomerActivity extends AppCompatActivity {
         txtAddress = findViewById(R.id.txtAddress);
         txtEmail = findViewById(R.id.txtEmail);
         txtPhone = findViewById(R.id.txtPhone);
-        customerDB = new CustomerDB(this,"CustomerDB1",null,1);
+        customerDB = new CustomerDB(this,"CustomerDB2",null,1);
         donHangDB = new DonHangDB(this,"DonHangDB1",null,1);
         chiTietDonHangDB = new ChiTietDonHangDB(this,"ChiTietDonHangDB1",null,1);
 

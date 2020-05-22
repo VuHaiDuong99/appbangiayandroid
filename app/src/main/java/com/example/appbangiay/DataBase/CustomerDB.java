@@ -15,7 +15,7 @@ import com.example.appbangiay.Model.Products;
 import java.util.ArrayList;
 
 public class CustomerDB extends SQLiteOpenHelper {
-    public static final String TableName ="CustomerDB1";
+    public static final String TableName ="CustomerDB2";
     public static final String Id ="Id";
     public static final String Name ="Name";
     public static final String Address = "Address";
@@ -62,7 +62,7 @@ public class CustomerDB extends SQLiteOpenHelper {
     }
     public void addCustomer(int id,String name,String email,String phone,String address){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql =" INSERT INTO CustomerDB(Id,Phone,Address,Name) VALUES (?,?,?,?,?)";
+        String sql =" INSERT INTO "+TableName+" (Id,Phone,Address,Name) VALUES (?,?,?,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
         sqLiteStatement.bindDouble(0,id);

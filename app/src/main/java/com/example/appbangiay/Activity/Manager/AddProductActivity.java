@@ -79,32 +79,36 @@ public class AddProductActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddProductActivity.this, ProductManager.class);
+                Intent intent = new Intent(AddProductActivity.this,ProductManager.class);
+                if(txtName.length() == 0 || txtDescription.length() == 0 && txtPrice.length() == 0 ){
+                    Toast.makeText(AddProductActivity.this,"Bạn chưa nhập đủ thông tin",Toast.LENGTH_SHORT).show();
+                }
+               else{
+                    Bundle bundle = new Bundle();
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                    byte[] imgeByte = baos.toByteArray();
+                    int id = categoryDB.getIdCustomer(spinner.getSelectedItem().toString());
+                    Log.e("idCategory",Integer.toString(id));
+                    bundle.putString("name",txtName.getText().toString().trim());
+                    bundle.putString("description",txtDescription.getText().toString().trim());
+                    bundle.putInt("price",Integer.parseInt(txtPrice.getText().toString().trim()));
+                    bundle.putInt("id_category",id);
+                    bundle.putByteArray("image",imgeByte);
 
-                Bundle bundle = new Bundle();
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
-                byte[] imgeByte = baos.toByteArray();
-                int id = categoryDB.getIdCustomer(spinner.getSelectedItem().toString());
-                Log.e("idCategory",Integer.toString(id));
-                bundle.putString("name",txtName.getText().toString().trim());
-                bundle.putString("description",txtDescription.getText().toString().trim());
-                bundle.putInt("price",Integer.parseInt(txtPrice.getText().toString().trim()));
-                bundle.putInt("id_category",id);
-                bundle.putByteArray("image",imgeByte);
-
-                // đặt bundle lên intent
-                intent.putExtras(bundle);
-                // trả về intent cho activity main
-                setResult(200,intent);
-                // kết thúc
+                    // đặt bundle lên intent
+                    intent.putExtras(bundle);
+                    // trả về intent cho activity main
+                    setResult(200,intent);
+                    // kết thúc
 //                startActivity(intent);
-                //startActivity(intent);
-                finish();
-                Toast.makeText(AddProductActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
+                    //startActivity(intent);
+                    finish();
+                    Toast.makeText(AddProductActivity.this,"Thêm Thành Công",Toast.LENGTH_SHORT).show();
 
+                }
             }
         });
     }
@@ -129,7 +133,7 @@ public class AddProductActivity extends AppCompatActivity {
             txtName.setText(bundle.getString("name"));
             txtDescription.setText(bundle.getString("description"));
             txtPrice.setText(Integer.toString(bundle.getInt("price")));
-            txtCategory.setText(Integer.toString(bundle.getInt("id_category")));
+           // spinner.setAdapter(Integer.toString(bundle.getInt("id_category")));
             byte[] image = bundle.getByteArray("image");
             Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
             imageView.setImageBitmap(bitmap);
@@ -154,10 +158,11 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void AnhXa() {
-        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
+        categoryDB = new CategoryDB(this,"CategoryDB5",null,1);
         spinner = findViewById(R.id.listCategorySpiner);
         btnBack = findViewById(R.id.idBackAddPro);
         txtName = findViewById(R.id.txtName);
+
         txtPrice= findViewById(R.id.txtPrice);
         txtDescription = findViewById(R.id.txtDescription);
         imageView = findViewById(R.id.imageView);

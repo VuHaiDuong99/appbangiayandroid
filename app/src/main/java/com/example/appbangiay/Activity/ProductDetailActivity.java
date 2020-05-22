@@ -15,19 +15,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.example.appbangiay.DataBase.ProductsDB;
 import com.example.appbangiay.Model.Cart;
 import com.example.appbangiay.Model.Products;
 import com.example.appbangiay.R;
 import com.example.appbangiay.Util.ImageAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 public class ProductDetailActivity extends AppCompatActivity {
@@ -54,18 +51,20 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.listCart.size()> 0){
-                    boolean tag = false;
+                if(MainActivity.listCart.size() > 0){
                     int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    boolean tag = false;
                     for(int i =0;i<MainActivity.listCart.size();i++){
                         // neu như san pham trung nhau
                         if(MainActivity.listCart.get(i).getId() == id){
-                            MainActivity.listCart.get(i).setCountProduct(soluong+MainActivity.listCart.get(i).getCountProduct());
+                            MainActivity.listCart.get(i).setCountProduct(soluong + MainActivity.listCart.get(i).getCountProduct());
+
+                            MainActivity.listCart.get(i).setPrice(
+                                    MainActivity.listCart.get(i).getCountProduct()
+                                            * tien);
                             tag = true;
+
                         }
-                        MainActivity.listCart.get(i).setPrice(
-                                MainActivity.listCart.get(i).getCountProduct()
-                                        *MainActivity.listCart.get(i).getPrice());
                     }
                     if(tag == false){
                         int sl = Integer.parseInt(spinner.getSelectedItem().toString());

@@ -13,8 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="67dp"
             android:layout_gravity="center"
-            android:background="#5EFFA407"
-            android:fontFamily="@string/fab_transformation_scrim_behavior"
+            android:background="#8BC34A"
+            android:textStyle="bold"
             android:gravity="center"
             android:hint="Chi Tiết Sản Phẩm"
             android:textSize="20dp"></TextView>

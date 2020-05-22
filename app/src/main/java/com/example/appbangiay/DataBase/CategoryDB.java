@@ -17,7 +17,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class CategoryDB extends SQLiteOpenHelper {
-    public static final String TableName ="CategoryDB3";
+    public static final String TableName ="CategoryDB5";
     public static final String Id ="Id";
     public static final String Name ="Name";
     public static final String Image = "Image";
@@ -59,7 +59,7 @@ public class CategoryDB extends SQLiteOpenHelper {
     }
     public void addCategory(String name,byte[] image){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql ="Insert into CategoryDB3 values (null,?,?)";
+        String sql ="Insert into " +TableName+ " values (null,?,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.clearBindings();
         sqLiteStatement.bindString(1,name);
@@ -68,6 +68,15 @@ public class CategoryDB extends SQLiteOpenHelper {
     }
     // Sua Category
     public void updateCategory (int id, Category category){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Id,category.getId());
+        contentValues.put(Name,category.getName());
+        contentValues.put(Image,category.getImage());
+        db.update(TableName, contentValues, "Id = " + category.getId(), null );
+        db.close();
+    }
+    public void updateCategory1 (int id, Category category){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Id,category.getId());

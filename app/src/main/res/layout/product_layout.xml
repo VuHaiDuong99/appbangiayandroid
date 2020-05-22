@@ -14,8 +14,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="30dp"
-            android:background="#5EFFA407"
-            android:fontFamily="@string/fab_transformation_scrim_behavior"
+            android:background="#8BC34A"
+            android:textStyle="bold"
             ></TextView>
         <ListView
             android:dividerHeight="10.0sp"

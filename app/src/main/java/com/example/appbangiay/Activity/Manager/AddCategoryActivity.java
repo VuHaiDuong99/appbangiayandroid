@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,7 +64,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                /*BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
@@ -72,7 +73,27 @@ public class AddCategoryActivity extends AppCompatActivity {
                         imgeByte);
                 categoryDB.updateCategory(id,category);
                 Intent intent = new Intent(AddCategoryActivity.this,CategoryManagerActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
+                Intent intent = new Intent(AddCategoryActivity.this,CategoryManagerActivity.class);
+
+                Bundle bundle = new Bundle();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+                byte[] imgeByte = baos.toByteArray();
+                bundle.putString("name",txtName.getText().toString().trim());
+                bundle.putByteArray("image",imgeByte);
+                // đặt bundle lên intent
+                intent.putExtras(bundle);
+                // trả về intent cho activity main
+                setResult(200,intent);
+                // kết thúc
+//                startActivity(intent);
+                //startActivity(intent);
+                finish();
+                Toast.makeText(AddCategoryActivity.this," Thành Công",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -98,7 +119,9 @@ public class AddCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddCategoryActivity.this, CategoryManagerActivity.class);
-
+                if(txtName.getText() == null){
+                    Toast.makeText(AddCategoryActivity.this,"Bạn chưa nhập đủ thông tin",Toast.LENGTH_SHORT).show();
+                }
                 Bundle bundle = new Bundle();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -133,7 +156,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
     private void AnhXa() {
 
-        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
+        categoryDB = new CategoryDB(this,"CategoryDB5",null,1);
         txtName = findViewById(R.id.txtNameAddCategory);
         imageView = findViewById(R.id.imageViewAddCategory);
         btnImage = findViewById(R.id.btnImageCategory);

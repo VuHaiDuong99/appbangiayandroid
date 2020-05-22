@@ -64,7 +64,7 @@ public class ProductsDB extends SQLiteOpenHelper {
     }
     public ArrayList<Products> getAllProductsNew(){
         ArrayList<Products> list = new ArrayList<>();
-        String sql = "Select * from " + TableName +" ORDER BY Id DESC ";
+        String sql = "Select * from " + TableName +" ORDER BY Id DESC Limit 6";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         // taoj list der tra ve
@@ -143,7 +143,7 @@ public class ProductsDB extends SQLiteOpenHelper {
         contentValues.put(Image,product.getImage());
         contentValues.put(Description,product.getDescription());
         contentValues.put(Price,product.getPrice());
-        contentValues.put(IdCategory,product.getPrice());
+        contentValues.put(IdCategory,product.getId_category());
         db.update(TableName, contentValues, "Id = " + product.getId(), null );
         db.close();
     }

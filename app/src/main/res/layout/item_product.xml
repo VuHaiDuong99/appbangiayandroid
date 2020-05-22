@@ -32,22 +32,25 @@
                  android:layout_width="411dp"
                  android:layout_height="100dp"
                  android:layout_margin="5dp"></ImageView>
+
              <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
+                 android:textStyle="bold"
                  android:id="@+id/nameProduct"
-                 android:gravity="center"
-                 android:textSize="20dp"
-                 >
-             </TextView>
-             <TextView
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:id="@+id/priceProduct"
                  android:gravity="center"
-                 android:textSize="20dp"
-                 >
-             </TextView>
+                 android:text="Ten"
+                 android:textColor="#131212"
+                 android:textSize="20dp"></TextView>
+
+             <TextView
+                 android:id="@+id/priceProduct"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:text="giá"
+                 android:textColor="#F44336"
+                 android:textSize="20dp"></TextView>
          </LinearLayout>
 
 

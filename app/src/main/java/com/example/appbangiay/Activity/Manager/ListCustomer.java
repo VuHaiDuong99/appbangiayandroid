@@ -63,7 +63,7 @@ public class ListCustomer extends AppCompatActivity {
         listView = findViewById(R.id.lisViewCustomer);
         list = new ArrayList<Customer>();
         donHangDB = new DonHangDB(this,"DonHangDB1",null,1);
-        customerDB = new CustomerDB(this,"CustomerDB1",null,1);
+        customerDB = new CustomerDB(this,"CustomerDB2",null,1);
         list = customerDB.getAllCustomer();
         adapter = new ListCustomerAdapter(this,list);
         listView.setAdapter(adapter);

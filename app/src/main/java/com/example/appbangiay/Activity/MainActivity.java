@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
@@ -29,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
+    public EditText txtSearch;
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private ViewFlipper viewFlipper;
@@ -46,10 +50,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AnhXa();
         ActionViewFiler();
+        //Search();
     }
     private void ActionViewFiler() {
         ArrayList<String> imageQuangCao = new ArrayList<>();
-        imageQuangCao.add("https://streetstyle.vn/images/companies/1/ban-giay-hieu-1421076935.jpg");
+        imageQuangCao.add("https://bloggiay.com/wp-content/uploads/2016/05/nikevsadidas.jpg");
         imageQuangCao.add("https://i.pinimg.com/originals/fa/45/96/fa4596ad9a9d39901eeb455ed4f74e44.jpg");
         imageQuangCao.add("https://bizweb.dktcdn.net/100/238/229/themes/576581/assets/banner-1.jpg?1506519169567");
         //imageQuangCao.add("drawable\\bannerbangiay2.jpg");
@@ -70,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void AnhXa(){
+        txtSearch = findViewById(R.id.txtSearch);
         drawerLayout = findViewById(R.id.drawerLayout);
-
         viewFlipper = findViewById(R.id.viewFlipper);
         recyclerView = findViewById(R.id.id_reView);
         recyclerView.setHasFixedSize(true);
@@ -82,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ProductsAdapter(getApplicationContext(),listProducts);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         proscessbar =  layoutInflater.inflate(R.layout.processbar,null);
         bottomNavigationView = findViewById(R.id.botton_nav);
@@ -90,6 +94,22 @@ public class MainActivity extends AppCompatActivity {
         // neu gio hang bang null , cap phat bo nho cho no,con ko du nguyen gia tri trong mang
         if(listCart !=null){}
         else{listCart = new ArrayList<Cart>();}
+    }
+    private void Search() {
+        txtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
     private BottomNavigationView.OnNavigationItemSelectedListener nav =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

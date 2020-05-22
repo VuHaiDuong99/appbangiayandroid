@@ -46,7 +46,6 @@ public class CategoryManagerActivity extends AppCompatActivity {
         clickButtonQuayLai();
         clickBack();
     }
-
     private void clickBack() {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +56,6 @@ public class CategoryManagerActivity extends AppCompatActivity {
         });
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -70,19 +68,18 @@ public class CategoryManagerActivity extends AppCompatActivity {
             adapter.setData(listCategory);
             adapter.notifyDataSetChanged();
         }
-        if(requestCode==200 && resultCode == 200){
+        if(requestCode == 200 && resultCode == 200){
             // laays duw lieu
-
             Bundle bundle = data.getExtras();
             //int id = bundle.getInt("id");
             String name = bundle.getString("name");
             byte[] image = bundle.getByteArray("image");
             Category category = new Category(id,name,image);
-            categoryDB.updateCategory(id,category);
+            categoryDB.updateCategory1(id,category);
             listCategory = categoryDB.getAllCategory();
             adapter.setData(listCategory);
             adapter.notifyDataSetChanged();
-        }
+                   }
     }
 
     private void clickButtonQuayLai() {
@@ -143,7 +140,7 @@ public class CategoryManagerActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.idBackCategory);
         btnQuayLai = findViewById(R.id.btnExit);
         btnAdd = findViewById(R.id.btnAddMan);
-        categoryDB = new CategoryDB(this,"CategoryDB3",null,1);
+        categoryDB = new CategoryDB(this,"CategoryDB5",null,1);
         listView = findViewById(R.id.listViewCategoryMan);
         registerForContextMenu(listView);
         listCategory = new ArrayList<Category>();

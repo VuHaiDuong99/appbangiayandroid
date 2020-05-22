@@ -82,7 +82,7 @@ public class DonHangDB  extends SQLiteOpenHelper {
        // taoj list der tra ve
        if (cursor != null) {
            while (cursor.moveToNext()) {
-                idDonHang = cursor.getInt(cursor.getColumnIndex("Id"));
+                    idDonHang = cursor.getInt(cursor.getColumnIndex("Id"));
            }
        }
        return idDonHang;

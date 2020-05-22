@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,10 +26,13 @@ import com.example.appbangiay.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHoder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHoder>
+        implements Filterable
+{
 
     private Context context;
-    private ArrayList<Products> listProduct = new ArrayList<>();
+    private ArrayList<Products> listProduct;
+    private ArrayList<Products> dataBackUp;
 
 
     public ProductsAdapter(Context context, ArrayList<Products> listProduct) {
@@ -35,7 +40,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHo
         this.listProduct = listProduct;
 
     }
-
+    public ArrayList<Products> getDataBackUp(){
+        return dataBackUp;
+    }
     @NonNull
     @Override
     public ItemHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,6 +74,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHo
         return listProduct.size();
     }
 
+
+
     public class ItemHoder extends RecyclerView.ViewHolder {
         public ImageView imageProducts;
         public TextView txtNameProduct, txtPriceProudcts;
@@ -88,12 +97,45 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ItemHo
                    context.startActivity(intent);
                 }
             });
-
         }
-
-
     }
+    @Override
+    public Filter getFilter() {
+        Filter f= new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults fr = new FilterResults();
+                if(dataBackUp==null){
+                    dataBackUp = new ArrayList<>(listProduct);
+                }
+                if(constraint == null || constraint.length()==0){
+                    fr.values = dataBackUp;
+                    fr.count = dataBackUp.size();
+                }
+                else {
+                    ArrayList<Products> newData = new ArrayList<>();
+                    for(Products products : listProduct){
+                        if(products.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                            newData.add(products);
+                            fr.count= newData.size();
+                            fr.values = newData;
+                        }
+                    }
+                }
+                return fr;
+            }
 
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                ArrayList<Products> tmp = (ArrayList<Products>)results.values;
+                listProduct.clear();
+                    for(Products products: tmp){
+                    listProduct.add(products);
+                    notifyDataSetChanged();
+                }
+            };
 
-
+        };
+        return f;
+    }
 }

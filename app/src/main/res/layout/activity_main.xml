@@ -24,7 +24,7 @@
                     android:layout_height="40dp"
                     android:drawableLeft="@drawable/ic_search_black_24dp"
                     android:text="Serach"
-
+                    android:id="@+id/txtSearch"
                     ></EditText>
 
                 <ViewFlipper
